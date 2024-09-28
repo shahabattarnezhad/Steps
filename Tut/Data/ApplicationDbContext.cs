@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Tut.Models;
 
 namespace Tut.Data;
 
@@ -9,5 +10,7 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-
+    // Mapping
+    public DbSet<School> Schools { get; set; }
+    public DbSet<Student> Students { get; set; }
 }
