@@ -1,10 +1,16 @@
 ﻿@model List<School>
 
 <div class="row">
-    <div>
+    <div class="">
         <h3>Schools List</h3>
     </div>
-    <div></div>
+    <div class="text-end">
+        <a 
+            class="btn btn-primary"
+           asp-controller="Schools"
+           asp-action="Create"
+        >Create New School</a>
+    </div>
 </div>
 
 <div>

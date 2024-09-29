@@ -1,0 +1,38 @@
+﻿@model School
+
+<div class="row">
+    <h1>Create School Page</h1>
+    <div>
+        <form asp-controller="Schools" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="mb-3">
+                <label>School Name</label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="Enter the school name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Capacity</label>
+                <input asp-for="Capacity" type="number" min="0" class="form-control" placeholder="Enter the school capacity" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Address</label>
+                <textarea asp-for="Address" rows="3" class="form-control" placeholder="Enter the school address"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success" type="submit">Save</button>
+                <a asp-controller="Schools"
+                   asp-action="Index"
+                   class="btn btn-secondary">Back to School List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

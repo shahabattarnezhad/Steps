@@ -1,4 +1,5 @@
-﻿namespace Tut.Models;
+﻿
+namespace Tut.Models;
 
 public class BaseEntity
 {
