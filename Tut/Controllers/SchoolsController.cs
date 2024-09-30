@@ -51,5 +51,117 @@ namespace Tut.Controllers
 
             return View(school);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int schoolId)
+        {
+            // Query
+            School result =  _db.Schools
+                                .FirstOrDefault(s => s.Id == schoolId)!;
+
+            if (result == null)
+                return RedirectToAction(nameof(Index));
+
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(School school)
+        {
+            if (!ModelState.IsValid)
+                return View(school);
+
+            var dbSchool =
+                _db.Schools.First(s => s.Id == school.Id);
+
+            if(dbSchool == null)
+                return RedirectToAction(nameof(Index));
+
+            dbSchool.Name = school.Name;
+            dbSchool.Address = school.Address;
+            dbSchool.Capacity = school.Capacity;
+
+            try
+            {
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+
+            return View(school);
+        }
+
+        //[HttpPost]
+        //public IActionResult Edit(School school)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View(school);
+
+        //    _db.Schools.Update(school);
+
+        //    try
+        //    {
+        //        _db.SaveChanges();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError(string.Empty, ex.Message);
+        //    }
+
+        //    return View(school);
+        //}
+
+        [HttpGet]
+        public IActionResult Delete(int schoolId)
+        {
+            School result = _db.Schools
+                                .FirstOrDefault(s => s.Id == schoolId)!;
+
+            if (result == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmationDelete(School school)
+        {
+            School result = _db.Schools
+                                .FirstOrDefault(s => s.Id == school.Id)!;
+
+            if (result == null)
+                return RedirectToAction(nameof(Index));
+
+            _db.Schools.Remove(result);
+
+            try
+            {
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult Details(int schoolId)
+        {
+            var result =
+                _db.Schools.FirstOrDefault(s => s.Id == schoolId);
+
+            if (result == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(result);
+        }
     }
 }

@@ -1,0 +1,16 @@
+﻿@model School
+
+<div class="row">
+    <h1>Details Page</h1>
+</div>
+
+<div> 
+    <p>Id: @Model.Id</p>
+    <p>Name: @Model.Name</p>
+    <p>Capacity: @Model.Capacity</p>
+    <p>Address: @Model.Address</p>
+</div>
+
+<a class="btn btn-secondary"
+asp-controller="Schools"
+asp-action="Index">Back to School List</a>
